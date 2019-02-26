@@ -1,0 +1,11 @@
+<nav>
+  <a routerLink="/map" routerLinkActive="active">Go back to map</a>
+</nav>
+<table>
+  <tr *ngFor="let markerRating of markerRatings">
+    <td>{{markerRating.review}}</td>
+    <td>{{markerRating.rating}}</td>
+    <td>{{markerRating.user.username}}</td>
+    <td>{{markerRating.marker.address}}</td>
+  </tr>
+</table>

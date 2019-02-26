@@ -1,0 +1,13 @@
+com\littleworld\todo\Application.class
+com\littleworld\todo\controllers\RatingController.class
+com\littleworld\todo\model\User.class
+com\littleworld\todo\services\MarkerService.class
+com\littleworld\todo\controllers\UserController.class
+com\littleworld\todo\services\TodoService.class
+com\littleworld\todo\model\Todo.class
+com\littleworld\todo\services\RatingService.class
+com\littleworld\todo\controllers\MarkerController.class
+com\littleworld\todo\services\UserService.class
+com\littleworld\todo\model\Marker.class
+com\littleworld\todo\model\Rating.class
+com\littleworld\todo\controllers\TodoController.class
