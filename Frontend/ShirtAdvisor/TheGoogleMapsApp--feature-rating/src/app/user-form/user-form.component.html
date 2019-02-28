@@ -1,73 +1,78 @@
 <div class="container">
-  <button class="btn btn-lg btn-primary btn-block" type="submit" routerLink="">Fuck Go Back</button>
+  <img class="registerHeading" src="https://i.imgur.com/KRJHOkF.jpg" width="800" alt="RegisterLogo">
   <div [hidden]="submitted">
-    <h1>Gebruikersregistartie</h1>
+    <h1 class="text-center">User Registration</h1>
     <form (ngSubmit)="verifyNewUser(username.value)" #userForm="ngForm">
+
+      <br>
       <div class="form-group">
-        <label for="naam">Naam</label>
-        <input type="text" class="form-control" id="naam"
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name"
                required
-               [(ngModel)]="model.naam" name="naam"
-               #naam="ngModel" placeholder="naam">
-        <div [hidden]="naam.valid || naam.pristine"
+               [(ngModel)]="model.name" name="name"
+               #name="ngModel" placeholder="Name">
+        <div [hidden]="name.valid || name.pristine"
              class="alert alert-danger">
-          Naam is verplicht
+          name is required
         </div>
       </div>
 
       <div class="form-group">
-        <label for="leeftijd">Leeftijd</label>
-        <input type="number" class="form-control" id="leeftijd" required [(ngModel)]="model.leeftijd" name="leeftijd" #leeftijd="ngModel" placeholder="leeftijd">
-        <div [hidden]="leeftijd.valid || leeftijd.pristine" class="alert alert-danger">
-          Leeftijd is verplicht
+        <label for="age">Age</label>
+        <input type="number" class="form-control" id="age" required [(ngModel)]="model.age" name="age" #age="ngModel" placeholder="Age">
+        <div [hidden]="age.valid || age.pristine" class="alert alert-danger">
+          age is required
         </div>
       </div>
 
       <div class="form-group">
-        <label for="username">Gebruikersnaam</label>
+        <label for="username">Username</label>
         <input type="text" class="form-control" id="username" required
-               [(ngModel)]="model.username" name="username" #username="ngModel" placeholder="gebruikersnaam">
+               [(ngModel)]="model.username" name="username" #username="ngModel" placeholder="Username">
         <div [hidden]="username.valid || username.pristine"
              class="alert alert-danger">
-          Username is verplicht
+          Username is required
         </div>
+        <br>
         <div class="form-group">
-          <label for="password">Wachtwoord</label>
+          <label for="password">Password</label>
           <input type="password" class="form-control" id="password" required
-                 [(ngModel)]="model.password" name="password" #password="ngModel" placeholder="wachtwoord">
+                 [(ngModel)]="model.password" name="password" #password="ngModel" placeholder="Password">
           <div [hidden]="password.valid || password.pristine"
                class="alert alert-danger">
-            Password is verplicht
+            Password is required
           </div>
         </div>
       </div>
 
-      <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" (click)="verifyNewUser(username.value)">Bevestig</button>
-      <button type="button" class="btn btn-default" (click)="newUser(); userForm.reset()">Leeg velden</button>
+      <button type="submit" class="btn btn-outline-success" [disabled]="!userForm.form.valid" (click)="verifyNewUser(username.value)">Confirm</button>
+      <button type="button" class="btn btn-outline-warning" (click)="newUser(); userForm.reset()">Empty fields</button>
+      <button type="button" class="btn btn-outline-danger" routerLink="">Back to login page</button>
     </form>
-    <label [hidden]="isnewUser">Kies een andere username</label>
+    <label [hidden]="isnewUser">Choose a different username</label>
   </div>
 
   <div [hidden]="!submitted">
-    <h2>Je hebt het volgende bevestigd:</h2>
-    <div class="row">
-      <div class="col-xs-3">Naam</div>
-      <div class="col-xs-9">{{ model.naam }}</div>
+    <h2>Your Account Information</h2>
+    <div class="panel">
+      <div class="col-xs-3 font-weight-bold">Name: </div>
+      <div class="col-xs-9">{{ model.name }}</div>
     </div>
-    <div class="row">
-      <div class="col-xs-3">Leeftijd</div>
-      <div class="col-xs-9">{{ model.leeftijd}}</div>
+    <div class="panel">
+      <div class="col-xs-3 font-weight-bold">Age: </div>
+      <div class="col-xs-9">{{ model.age}}</div>
     </div>
-    <div class="row">
-      <div class="col-xs-3">Gebruikersnaam</div>
+    <div class="panel">
+      <div class="col-xs-3 font-weight-bold">Username: </div>
       <div class="col-xs-9">{{ model.username}}</div>
     </div>
-    <div class="row">
-      <div class="col-xs-3">Wachtwoord</div>
+    <div class="panel">
+      <div class="col-xs-3 font-weight-bold">Password: </div>
       <div class="col-xs-9" type="password">{{ model.password}}</div>
     </div>
     <br>
-    <button class="btn btn-primary" routerLink="" type="submit" (click)="saveUser()">Oké</button>
-    <button class="btn btn-primary" (click)="submitted = false">Wijzig gebruiker</button>
+    <button class="btn btn-outline-success" routerLink="" type="submit" (click)="saveUser()">Continue to login page</button>
+    <button class="btn btn btn-outline-danger" (click)="submitted = false">Change the User</button>
   </div>
-</div>
+  </div>
+

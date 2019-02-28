@@ -1,15 +1,15 @@
-export class User{
+export class User {
 
-  public id: Number = 0;
-  public naam: String;
-  public leeftijd: Number;
-  public username: String;
-  public password: String;
+  public id: number = 0;
+  public name: string;
+  public age: number;
+  public username: string;
+  public password: string;
 
-  constructor(id: Number, naam: String, leeftijd: Number, username: String, password: String) {
+  constructor(id: number, name: string, age: number, username: string, password: string) {
     this.id = id;
-    this.naam = naam;
-    this.leeftijd = leeftijd;
+    this.name = name;
+    this.age = age;
     this.username = username;
     this.password = password;
   }

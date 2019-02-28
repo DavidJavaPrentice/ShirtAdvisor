@@ -4,7 +4,7 @@ import {MarkerRating} from '../MarkerRating';
 import {LocalStorageService} from '../LocalStorageService';
 import {MarkerService} from '../marker.service';
 import {User} from '../User';
-import {LocationService} from "../location-service.service";
+import {LocationService} from '../location-service.service';
 
 @Component({
   selector: 'app-marker-rating',
@@ -15,14 +15,14 @@ export class MarkerRatingComponent implements OnInit {
 
   @Input() rating: number;
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
-  review: String;
-  model: MarkerRating = new MarkerRating(0,this.storage.getStoredUser(),null, this.rating,'');
+  review: string;
+  model: MarkerRating = new MarkerRating(0, this.storage.getStoredUser(), null, this.rating, '');
   submitted = false;
   invalid = false;
 
   constructor(private markerService: MarkerService, private locationService: LocationService, private markerRatingService: MarkerRatingService, private storage: LocalStorageService) { }
 
-  submit(){
+  submit() {
     this.submitted = true;
     this.invalid = false;
   }
@@ -64,7 +64,7 @@ export class MarkerRatingComponent implements OnInit {
 
 
 
-  ngOnInit(): void{
+  ngOnInit(): void {
   }
 
 }

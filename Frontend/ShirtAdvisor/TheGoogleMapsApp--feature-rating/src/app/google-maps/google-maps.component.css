@@ -1,10 +1,95 @@
-agm-map {
-  height: 600px;
+.sideb {
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
+agm-map {
+  height:1000px;
+  width: 1600px;
+  float: right;
+}
+
+/*.rating {*/
+  /*background: url("http://pluspng.com/img-png/star-png-star-vector-png-transparent-image-2000.png") repeat-x 0 0;*/
+  /*width: 150px;*/
+  /*margin: 0 auto;*/
+/*}*/
+
+/*.rating input[type="radio"] {*/
+  /*position: absolute;*/
+  /*opacity: 0;*/
+  /*filter: alpha(opacity=0);*/
+/*}*/
+/*.rating input[type="radio"].Great:checked ~ span {*/
+  /*width: 100%;*/
+/*}*/
+/*.rating input[type="radio"].Good:checked ~ span {*/
+  /*width: 80%;*/
+/*}*/
+/*.rating input[type="radio"].OK:checked ~ span {*/
+  /*width: 60%;*/
+/*}*/
+/*.rating input[type="radio"].Poor:checked ~ span {*/
+  /*width: 40%;*/
+/*}*/
+/*.rating input[type="radio"].Abysmal:checked ~ span {*/
+  /*width: 20%;*/
+/*}*/
+/*.rating label {*/
+  /*display: block;*/
+  /*width: 30px;*/
+  /*height: 30px;*/
+  /*margin: 0!important;*/
+  /*padding: 0!important;*/
+  /*text-indent: -999em;*/
+  /*float: left;*/
+  /*position: relative;*/
+  /*z-index: 10;*/
+  /*background: transparent!important;*/
+  /*cursor: pointer;*/
+/*}*/
+/*.rating label:hover ~ span {*/
+  /*background-position: 0 -30px;*/
+/*}*/
+/*.rating label.Great:hover ~ span {*/
+  /*width: 100% !important;*/
+/*}*/
+/*.rating label.Good:hover ~ span {*/
+  /*width: 80% !important;*/
+/*}*/
+/*.rating label.OK:hover ~ span {*/
+  /*width: 60% !important;*/
+/*}*/
+/*.rating label.Poor:hover ~ span {*/
+  /*width: 40% !important;*/
+/*}*/
+/*.rating label.Abysmal:hover ~ span {*/
+  /*width: 20% !important;*/
+/*}*/
+/*.rating span {*/
+  /*display: block;*/
+  /*width: 0;*/
+  /*position: relative;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  /*height: 30px;*/
+  /*background: url("http://pluspng.com/img-png/star-png-star-vector-png-transparent-image-2000.png") repeat-x 0 -60px;*/
+  /*-webkit-transition: -webkit-width 0.5s;*/
+  /*-moz-transition: -moz-width 0.5s;*/
+  /*-ms-transition: -ms-width 0.5s;*/
+  /*-o-transition: -o-width 0.5s;*/
+  /*transition: width 0.5s;*/
+/*}*/
+
+
+
 .rating {
   float:left;
 }
 
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
 .rating:not(:checked) > input {
   position:absolute;
   top:-9999px;
@@ -14,13 +99,14 @@ agm-map {
 .rating:not(:checked) > label {
   float:right;
   width:1em;
-  padding:0.1em;
+  padding:0 .1em;
   overflow:hidden;
   white-space:nowrap;
   cursor:pointer;
   font-size:200%;
   line-height:1.2;
   color:#ddd;
+  text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
 }
 
 .rating:not(:checked) > label:before {
@@ -29,14 +115,31 @@ agm-map {
 
 .rating > input:checked ~ label {
   color: #f70;
+  text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
 }
 
 .rating:not(:checked) > label:hover,
 .rating:not(:checked) > label:hover ~ label {
   color: gold;
+  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
 }
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
 .rating > input:checked ~ label:hover,
 .rating > input:checked ~ label:hover ~ label,
 .rating > label:hover ~ input:checked ~ label {
   color: #ea0;
+  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
 }
+
+.rating > label:active {
+  position:relative;
+  top:2px;
+  left:2px;
+}
+.inputfloat {
+  float: right;
+  margin-left: 10px;
+}
+

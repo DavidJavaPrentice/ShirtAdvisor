@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserServiceService} from "../user-service.service";
-import {User} from "../User";
-import {LocalStorageService} from "../LocalStorageService";
+import {UserServiceService} from '../user-service.service';
+import {User} from '../User';
+import {LocalStorageService} from '../LocalStorageService';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  validateUser(username: String, password: String) {
+  validateUser(username: string, password: string) {
     this.userService.findUser(username, password).subscribe(
       result => {
         if (result.id > 0) {
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
           this.loggedInIncorrect = true;
         }
       }
-    )
+    );
   }
 
   resetFlags() {

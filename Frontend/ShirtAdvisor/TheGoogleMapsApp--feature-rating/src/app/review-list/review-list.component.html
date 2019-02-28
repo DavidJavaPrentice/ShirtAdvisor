@@ -1,11 +1,24 @@
+<div class="tableBackground">
 <nav>
-  <a routerLink="/map" routerLinkActive="active">Go back to map</a>
+  <button type="button" class="btn btn-dark" routerLink="/map" routerLinkActive="active">Go back to map</button>
 </nav>
-<table>
+<br>
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Location</th>
+    <th scope="col">Review</th>
+    <th scope="col">Rating</th>
+    <th scope="col">Username</th>
+  </tr>
+  </thead>
+  <td>{{AvgRating}}</td>
   <tr *ngFor="let markerRating of markerRatings">
+    <td>{{markerRating.marker.address}}</td>
     <td>{{markerRating.review}}</td>
     <td>{{markerRating.rating}}</td>
     <td>{{markerRating.user.username}}</td>
-    <td>{{markerRating.marker.address}}</td>
   </tr>
 </table>
+</div>
+

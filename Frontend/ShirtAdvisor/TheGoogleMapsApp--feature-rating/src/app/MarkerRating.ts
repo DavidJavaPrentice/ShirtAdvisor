@@ -2,7 +2,7 @@ import {Marker} from './Marker';
 import {User} from './User';
 
 export class MarkerRating {
-  public id: number = 0;
+  public id = 0;
   public user: User;
   public marker: Marker;
   public rating: number;
