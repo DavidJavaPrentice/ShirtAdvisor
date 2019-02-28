@@ -12,7 +12,7 @@ export class MarkerService {
 
   constructor(private http: HttpClient) { }
 
-  sendMarker(newMarker: Marker){
+  sendMarker(newMarker: Marker) {
     return this.http.post('http://localhost:8080/marker', newMarker).pipe(
       catchError(this.handleError<Marker>(`saveUser`))
     );
@@ -32,7 +32,7 @@ export class MarkerService {
       catchError(this.handleError<Marker>(`delete`))
     );
   }
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       return of(result as T);

@@ -12,18 +12,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String naam;
-    private int leeftijd;
+    private String name;
+    private int age;
     private String username;
     private String password;
     private int score;
 
     public User() {}
 
-    public User(int id, String naam, int leeftijd, String username, String password, int score) {
+    public User(int id, String name, int age, String username, String password, int score) {
         this.id = id;
-        this.naam = naam;
-        this.leeftijd = leeftijd;
+        this.name = name;
+        this.age = age;
         this.username = username;
         this.password = password;
         this.score = score;
@@ -33,20 +33,20 @@ public class User {
         return id;
     }
 
-    public String getNaam() {
-        return naam;
+    public String getName() {
+        return name;
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getLeeftijd() {
-        return leeftijd;
+        return age;
     }
 
-    public void setLeeftijd(int leeftijd) {
-        this.leeftijd = leeftijd;
+    public void setLeeftijd(int age) {
+        this.age = age;
     }
 
     public String getUsername() {
@@ -73,8 +73,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", naam='" + naam + '\'' +
-                ", leeftijd=" + leeftijd +
+                ", name='" + name + '\'' +
+                ", age=" + age +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", score=" + score +

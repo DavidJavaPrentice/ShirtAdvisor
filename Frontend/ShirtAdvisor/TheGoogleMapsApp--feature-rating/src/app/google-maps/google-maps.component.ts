@@ -5,6 +5,8 @@ import {Marker} from '../Marker';
 import {MarkerRating} from '../MarkerRating';
 import {MarkerRatingService} from '../marker-rating.service';
 import {LocalStorageService} from '../LocalStorageService';
+import {marker} from '../app.component';
+import {Observable} from 'rxjs';
 
 
 // import {RatingService} from './rating.service';
@@ -15,7 +17,7 @@ import {LocalStorageService} from '../LocalStorageService';
   styleUrls: ['./google-maps.component.css'],
 })
 export class GoogleMapsComponent implements OnInit{
-  title = 'ShirtAdvisor';
+  title = 'CoffeeAdvisor';
   zoom = 10;
   lat = 52.509317;
   lng = 6.065663;
@@ -28,15 +30,14 @@ export class GoogleMapsComponent implements OnInit{
   address: Object;
   @Input() rating: number;
   @Input() review: string;
-  @Input() itemId: number;
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
   ratingName: string;
   reviewName: string;
-  model: MarkerRating = new MarkerRating(0,this.storage.getStoredUser(),null,3,'');
+  model: MarkerRating = new MarkerRating(0, this.storage.getStoredUser(), null, 3, '');
   submitted = false;
   invalid = false;
-
-  raymond: string;
+  mId: number = 6;
+  avgRating: Observable<number> = this.markerRatingService.averageStarsQuery(this.mId);
 
   markers: Marker[] = [
     {id: 0, address: this.address, lat: 52.509317, lng: 6.065663, draggable: true},
@@ -68,6 +69,7 @@ export class GoogleMapsComponent implements OnInit{
     // );
     this.getDirection(
     );
+    // this.getAvgRating(this.markers);
   }
   // onClick(rating: number): void {
   //   this.ratingName = this.itemId + '_rating';
@@ -77,6 +79,7 @@ export class GoogleMapsComponent implements OnInit{
   //     rating: rating
   //   });
   // }
+
   clickedMarker(marker: Marker, index: number) {
     console.log('Clicked Marker:' + marker.address + 'Index:' + index);
   }
@@ -148,27 +151,42 @@ export class GoogleMapsComponent implements OnInit{
 
 
 
-  submit(){
+  submit() {
     this.submitted = true;
     this.invalid = false;
   }
-  saveMarkerRating(m){
+  saveMarkerRating(m) {
 
     console.log(this.model.review);
-    //this.model.review = m.review;
+    // this.model.review = m.review;
     // this.model.rating = rating;
     // this.model.photo = photo;
     this.model.user = this.storage.getStoredUser();
     console.log(this.model.user.username);
     this.model.marker = m;
-    if (this.model.user.id > 0 && m.id > 0){
+    if (this.model.user.id > 0 && m.id > 0) {
       console.log(this.model.review);
       this.markerRatingService.saveMarkerRating(this.model).subscribe();
       this.submit();
-    }else{
+    } else {
       this.invalid = true;
     }
   }
+  //
+  // getAvgRating(m) {
+  //   console.log(m);
+  //   this.markerRatingService.averageStarsQuery(m.id).subscribe(
+  //     AvgRating => {
+  //       this.avgRating = AvgRating;
+  //       console.log(this.avgRating);
+  //
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
+
   deleteMarker(id: any) {
     console.log('deleted marker from david his head!');
     this.markerService.deleteMarker(id).subscribe(

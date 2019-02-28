@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@fortawesome/fontawesome": "^1.1.8",
     "@h21-map/google-markercluster": "^1.0.4",
     "agm-direction": "^0.7.6",
     "angular-bootstrap-md": "^7.4.1",

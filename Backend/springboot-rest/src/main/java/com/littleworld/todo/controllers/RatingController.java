@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,5 +63,22 @@ public class RatingController {
     @RequestMapping(value = "/historyQry", method = RequestMethod.GET)
     public List<Rating> getAllRatingsByUserId(@RequestParam(value="user") int id) {
         return ratingService.findByUseridNativeQuery(id);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/average/{id}", method = RequestMethod.GET)
+    public Double averageStarsQuery (@PathVariable int id) {
+        List <Rating> ratings = ratingService.findByMarkerId(id);
+        double som = 0;
+        for (Rating rating: ratings) {
+            System.out.println(" " + rating.getMarker().getId() + " " + rating.getRating());
+            som += rating.getRating();
+        }
+        if (ratings.size() == 0){
+            return 0.0;
+        }else {
+            return som/ratings.size();
+        }
+
+
     }
 }

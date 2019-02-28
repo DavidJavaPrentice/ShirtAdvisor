@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import {User} from "../User";
+import {User} from '../User';
 
-import {UserServiceService} from "../user-service.service";
+import {UserServiceService} from '../user-service.service';
 
 @Component({
 
@@ -11,7 +11,7 @@ import {UserServiceService} from "../user-service.service";
   styleUrls: ['./user-form.component.css']
 })
 
-export class UserFormComponent implements OnInit{
+export class UserFormComponent implements OnInit {
 
   model = new User(0, '', null, '', '');
   isnewUser = true;
@@ -25,11 +25,11 @@ export class UserFormComponent implements OnInit{
   }
 
   newUser() {
-    this.model = new User(0,'',0,'','');
+    this.model = new User(0, '', 0, '', '');
   }
 
-  checkPassword(pass: String): boolean {
-    return pass===this.model.password;
+  checkPassword(pass: string): boolean {
+    return pass === this.model.password;
   }
 
   toLogin() {
@@ -40,10 +40,10 @@ export class UserFormComponent implements OnInit{
     this.userService.saveUser(this.model).subscribe();
   }
 
-  verifyNewUser(username: String) {
+  verifyNewUser(username: string) {
     this.userService.findUserByUserName(username).subscribe(
       result => {
-        if(result.id <= 0) {
+        if (result.id <= 0) {
           this.isnewUser = true;
           this.onSubmit();
         } else {

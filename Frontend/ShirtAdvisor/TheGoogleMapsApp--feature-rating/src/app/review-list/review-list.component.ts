@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MarkerRatingService} from "../marker-rating.service";
-import {MarkerRating} from "../MarkerRating";
+import {MarkerRatingService} from '../marker-rating.service';
+import {MarkerRating} from '../MarkerRating';
+import {marker} from '../app.component';
 
 @Component({
   selector: 'app-review-list',
@@ -11,6 +12,7 @@ import {MarkerRating} from "../MarkerRating";
 export class ReviewListComponent implements OnInit {
 
   markerRatings: MarkerRating[];
+  AvgRating: number;
 
   constructor(private markerRatingService: MarkerRatingService) { }
 
@@ -19,7 +21,7 @@ export class ReviewListComponent implements OnInit {
     this.getAllReviews();
   }
 
-  getAllReviews(){
+  getAllReviews() {
     this.markerRatingService.findAll().subscribe(
       markerRatings => {
         this.markerRatings = markerRatings;

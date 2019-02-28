@@ -1,13 +1,13 @@
-<h1>{{ title }}</h1>
+<!-- Bootstrap row -->
 
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
+<div class="container">
 <agm-map
   [latitude]="lat"
   [longitude]="lng"
   [zoom]="zoom"
   [disableDefaultUI]=false
   [zoomControl]="false" (mapClick)="mapClicked($event)">
+
   <agm-direction [origin]="origin" [destination]="destination">
   </agm-direction>
   <agm-marker
@@ -17,158 +17,162 @@
     [longitude]="m.lng"
     [markerDraggable]="m.draggable"
     (dragEnd)="markerDragEnd(m, $event)">
-    <agm-info-window>
-      {{m.address}}
+    <agm-info-window let mId=m.id>
+      <b>{{m.address}}</b>
+      <p></p>
+      <b>Rating: {{avgRating | async}} Stars </b>
       <br>
 
-      {{model.rating}}
-      {{model.review}}
-
+      <!--<label>Review</label>-->
+      <!--<textarea class="form-control" [(ngModel)]='m.id'  placeholder = "Please enter your review..."></textarea>-->
       <br>
-      <label>Review</label>
-        <textarea class="form-control" [(ngModel)]='model.review'  placeholder = "Please enter your review..."></textarea>
-
+      <label><b>Review</b></label>
+      <textarea class="form-control" [(ngModel)]='model.review'  placeholder = "Please enter your review... (max 255 characters)"></textarea>
       <!--<app-marker-rating></app-marker-rating>-->
       <fieldset class="rating">
-        <input type="radio" [name]="ratingName" value="5" [checked]="rating===5" />
+        <input type="radio" [name]="ratingName" value="5" [checked]="model.rating==5" />
         <label title="Great" (click)='model.rating=5'>5 stars</label>
 
-        <input type="radio" [name]="ratingName" value="4" [checked]="rating===4" />
+        <input type="radio" [name]="ratingName" value="4" [checked]="model.rating==4" />
         <label title="Good" (click)='model.rating=4'>4 stars</label>
 
-        <input type="radio" [name]="ratingName" value="3" [checked]="rating===3" />
+        <input type="radio" [name]="ratingName" value="3" [checked]="model.rating==3" />
         <label title="OK" (click)='model.rating=3'>3 stars</label>
 
-        <input type="radio" [name]="ratingName" value="2" [checked]="rating===2" />
+        <input type="radio" [name]="ratingName" value="2" [checked]="model.rating==2" />
         <label title="Poor" (click)='model.rating=2'>2 stars</label>
 
-        <input type="radio" [name]="ratingName" value="1" [checked]="rating===1" />
+        <input type="radio" [name]="ratingName" value="1" [checked]="model.rating==1" />
         <label title="Abysmal" (click)='model.rating=1'>1 star</label>
       </fieldset>
       <br>
       <button>
-        <a class="deleteMarker" (click)="deleteMarker(m.id)">Delete</a>
+        <a class="deleteMarker" (click)="deleteMarker(m.id)" onclick = "history.go(0)">Delete</a>
       </button>
-        <button type="button" id="buttonStars" (click)="saveMarkerRating(m)">Submit</button>
-
-      <nav>
-        <a routerLink="/reviewpage" routerLinkActive="active">Go to reviews</a>
-      </nav>
-
-
-
-
+      <button type="button" id="buttonStars" onclick = "history.go(0)" (click)="saveMarkerRating(m)">Submit</button>
     </agm-info-window>
   </agm-marker>
 </agm-map>
 
-<div class="row">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">add new marker</h3>
-    </div>
-    <div class="panel-body">
-      <form (submit)= "addMarker()">
-        <label>LocationName</label>
-        <input type="text" [(ngModel)]="address" (setAddress)="getAddress($event)" name="address" googleplace>
+    <div class="row" id="body-row">
+      <!-- Sidebar -->
+      <div id="sidebar-container" class="sideb"><!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
+        <!-- Bootstrap List Group -->
+        <ul class="list-group">
+          <!-- Separator with title -->
+          <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+            <h3>{{title}}</h3>
+          </li>
+          <!-- /END Separator -->
+          <!-- Menu with submenu -->
+          <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark text-white list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-dashboard fa-fw mr-3"></span>
+              <span class="menu-collapsed">Add Marker</span>
+              <span class="submenu-icon ml-auto"></span>
+            </div>
+          </a>
+          <!-- Submenu content -->
+          <div id='submenu1' class="collapse sidebar-submenu">
+            <a class="list-group-item list-group-item-action bg-dark text-white">
+              <span class="menu-collapsed"> </span>
+              <div class="panel">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                  </div>
+                  <div class="panel-body">
+                    <form (submit)= "addMarker()">
+                      <label>LocationName </label>
+                      <input type="text" class="inputfloat" [(ngModel)]="address" (setAddress)="getAddress($event)" name="address" googleplace>
+                      <br>
+                      <label>Latitude</label>
+                      <input type="text"  class="inputfloat" [(ngModel)]="locationService.latitude" name="markerLat">
+                      <br>
+                      <label>Longitude</label>
+                      <input type="text"  class="inputfloat" [(ngModel)]="locationService.longitude" name="markerLng">
+                      <br>
+                      <label>Draggable</label>
+                      <select [(ngModel)]="markerDraggable" name="markerDraggable"  class="inputfloat" >
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                      </select>
+                      <!--<input type="submit" value="Place Marker!">-->
+                      <button class="btn btn-lg btn-primary btn-block" type="submit" routerLink="map" onclick = "history.go(0)"> Place Marker! </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
 
-        <label>Latitude</label>
-        <input type="text" [(ngModel)]="locationService.latitude" name="markerLat">
+          <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark text-white list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-user fa-fw mr-3"></span>
+              <span class="menu-collapsed">Get Directions!</span>
+              <span class="submenu-icon ml-auto"></span>
+            </div>
+          </a>
+          <div id='submenu2' class="collapse sidebar-submenu">
+            <a class="list-group-item list-group-item-action bg-dark text-white">
+              <span class="menu-collapsed"></span>
+              <div class="panel">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                  </div>
+                  <div class="panel-body">
+                    <form (submit)= "getDirection()">
+                      <label>Origin</label>
+                      <input type="text" class="inputfloat" [(ngModel)]="addressOrigin" (setAddress)="getAddressOrigin($event)" name="addressDirection" googleplace>
+                      <br>
+                      <label>Latitude</label>
+                      <input type="text" class="inputfloat" [(ngModel)]="locationService.latitudeOrigin" name="originLat">
+                      <br>
+                      <label>Longitude</label>
+                      <input type="text" class="inputfloat" [(ngModel)]="locationService.longitudeOrigin" name="originLng">
+                      <br>
+                      <br>
+                      <label>Destination</label>
+                      <input type="text" class="inputfloat" [(ngModel)]="addressDest" (setAddress)="getAddressDest($event)" name="addressDirection" googleplace>
+                      <br>
+                      <label>Latitude</label>
+                      <input type="text" class="inputfloat" [(ngModel)]="locationService.latitudeDest" name="destinationLat">
+                      <br>
+                      <label>Longitude</label>
+                      <input type="text" class="inputfloat" [(ngModel)]="locationService.longitudeDest" name="destinationLng">
+                      <br>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </a>
 
-        <label>Longitude</label>
-        <input type="text" [(ngModel)]="locationService.longitude" name="markerLng">
+          </div>
+          <a href="reviewpage" class="bg-dark text-white list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-tasks fa-fw mr-3"></span>
+              <span class="menu-collapsed">Reviews</span>
+            </div>
+          </a>
 
-        <label>Draggable</label>
-        <select [(ngModel)]="markerDraggable" name="markerDraggable">
-          <option value="No">No</option>
-          <option value="Yes">Yes</option>
-        </select>
-        <input type="submit" value="Place Marker!">
-      </form>
-    </div>
-  </div>
+          <a href="#" class="bg-dark text-white list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-calendar fa-fw mr-3"></span>
+              <span class="menu-collapsed">LogOut</span>
+            </div>
+          </a>
+        </ul><!-- List Group END-->
+      </div><!-- sidebar-container END -->
+
+      <!--&lt;!&ndash; Logo &ndash;&gt;-->
+      <!--<li class="list-group-item logo-separator d-flex justify-content-center">-->
+      <!--<img src='https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg' width="30" height="30" />-->
+      <!--</li>-->
+
+      <!-- MAIN -->
+
+    </div><!-- body-row END -->
+
 </div>
-
-<div class="row">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Directions</h3>
-    </div>
-    <div class="panel-body">
-      <form (submit)= "getDirection()">
-        <label>Origin</label>
-        <input type="text" [(ngModel)]="addressOrigin" (setAddress)="getAddressOrigin($event)" name="addressDirection" googleplace>
-
-        <label>Latitude</label>
-        <input type="text" [(ngModel)]="locationService.latitudeOrigin" name="originLat">
-
-        <label>Longitude</label>
-        <input type="text" [(ngModel)]="locationService.longitudeOrigin" name="originLng">
-        <br>
-        <label>Destination</label>
-        <input type="text" [(ngModel)]="addressDest" (setAddress)="getAddressDest($event)" name="addressDirection" googleplace>
-
-        <label>Latitude</label>
-        <input type="text" [(ngModel)]="locationService.latitudeDest" name="destinationLat">
-
-        <label>Longitude</label>
-        <input type="text" [(ngModel)]="locationService.longitudeDest" name="destinationLng">
-        <input type="submit" value="Get Location!">
-      </form>
-    </div>
-  </div>
-</div>
-
-<!--<div class="container-fluid bg-light py-3">-->
-<!--<form id="contact-form" method="post" action="contact.php" role="form">-->
-<!--<div class="messages"></div>-->
-<!--<div class="controls">-->
-<!--<div class="row">-->
-<!--<div class="col-sm-4">-->
-<!--<div class="form-group">-->
-<!--<label for="form_name">Name *</label>-->
-<!--<input id="form_name" type="text" name="surname" class="form-control" placeholder="Please enter your name *" required="required" data-error="name is required.">-->
-<!--<div class="help-block with-errors"></div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-sm-4">-->
-<!--<div class="form-group">-->
-<!--<label> Location *</label>-->
-<!--<input class="form-control" type="text" [(ngModel)]="address" (setAddress)="getAddress($event)" name="addressDirection" googleplace>-->
-<!--<div class="help-block with-errors"></div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-sm-4">-->
-<!--<div class="form-group">-->
-<!--<label>Rating *</label>-->
-<!--<br>-->
-
-<!--<div class="help-block with-errors"></div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="clearfix"></div>-->
-
-<!--<div class="row">-->
-<!--<div class="col-md-12">-->
-<!--<div class="form-group">-->
-<!--<label for="form_message">Message *</label>-->
-<!--<textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="send a message."></textarea>-->
-<!--<div class="help-block with-errors"></div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-md-12">-->
-<!--<input type="submit" class="btn btn-warning btn-send" value="Send message">-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="row">-->
-<!--<div class="col-md-12">-->
-<!--<p class="text-muted"><strong>*</strong> These fields are required.</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</form>-->
-<!--</div>-->
 
 <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript" src="js/autocomplete.js"></script>

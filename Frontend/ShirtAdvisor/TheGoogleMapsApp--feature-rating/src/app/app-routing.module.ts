@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 // import {BierListComponent} from "./bier-list/bier-list.component";
-import {LoginComponent} from "./login/login.component";
-import {UserFormComponent} from "./user-form/user-form.component";
+import {LoginComponent} from './login/login.component';
+import {UserFormComponent} from './user-form/user-form.component';
 import {GoogleMapsComponent} from './google-maps/google-maps.component';
-import {ReviewListComponent} from "./review-list/review-list.component";
+import {ReviewListComponent} from './review-list/review-list.component';
 // import {HomepageComponent} from "./homepage/homepage.component";
 // import {RateComponent} from "./rate/rate.component";
 // import {GeschiedenisComponent} from "./geschiedenis/geschiedenis.component";

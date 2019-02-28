@@ -7,7 +7,7 @@ export class Marker {
 
   constructor(id: number, address: Object, lat: number, lng: number, draggable: boolean) {
     this.id = id;
-    this.address =address;
+    this.address = address;
     this.lat = lat;
     this.lng = lng;
     this.draggable = draggable;
